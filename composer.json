@@ -1,0 +1,16 @@
+{
+    "name": "app/classes",
+    "description": "Sistema simples para registrar produtos para listas de compras.",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roger C Guilherme",
+            "email": "rogercguilherme@gmail.com"
+        }
+    ],
+    "require": {}
+}

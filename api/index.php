@@ -1,0 +1,1 @@
+<?php require  '../app/routes/api_routes.php';?>
