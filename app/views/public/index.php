@@ -17,7 +17,8 @@
                <form id="formAdicionarProduto" class="row row-cols-lg-auto g-3 align-items-center">
                     <div class="col-12">
                         <input type="text" class="form-control" id="nomeProduto" placeholder="Nome do Produto" required>
-                        <input type="hidden" class="form-control" id="idLista" >
+                        <input type="hidden" class="form-control" name="listaId" id="idLista" >
+                        
                     </div>
                     <div class="col-12">
                         <input type="number" class="form-control" id="quantidadeProduto" placeholder="Quantidade" required>
@@ -54,7 +55,7 @@
     <?php foreach (array_reverse($lists) as $list): ?>
         <div class="d-flex justify-content-between  pt-3 border border-start-0 border-end-0">
             <div class="col-2 col-sm-1" id="EditarListas">
-            <button data-id="<?php echo $list['id']; ?>" onclick="#topo" title="Add this item" class="editar btn btn-primary">Ver</button>
+            <button id="ver" data-id="<?php echo $list['id']; ?>" onclick="topFunction()" title="Add this item" class="editar btn btn-primary">Ver</button>
             </div>      
             
             <div class="col-5 col-sm-8">

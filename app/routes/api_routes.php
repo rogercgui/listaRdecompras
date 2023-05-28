@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'adicionar_produto') {
     $nome = $data['nome'];
     $quantidade = $data['quantidade'];
     $api->adicionarProduto($listaId, $nome, $quantidade);
-    $response='Produto adicionado com sucesso';
+    $response='Produto adicionado com sucesso '.$listaId;
     //echo json_encode('Produto adicionado com sucesso');
 }
 

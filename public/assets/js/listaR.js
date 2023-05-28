@@ -50,7 +50,14 @@ $(document).ready(function () {
     // Adiciona produtos em uma lista
     $('#formAdicionarProduto').submit(function (e) {
         e.preventDefault();
-        var listaId = 144
+        var capturaIDLista = $('#idLista').val();
+        if (capturaIDLista  === '') {
+           // delete listaId
+            console.log('O campo está vazio!');
+        } else {
+            listaId = capturaIDLista;
+            console.log('Valor do campo:', listaId );
+        }
         var nome = $('#nomeProduto').val();
         var quantidade = $('#quantidadeProduto').val();
         $.ajax({
@@ -60,6 +67,7 @@ $(document).ready(function () {
             data: JSON.stringify({ listaId: listaId, nome: nome, quantidade: quantidade }),
             success: function (response) {
                 carregarProdutos(listaId);
+                //$('#listaId').val();
                 $('#nomeProduto').val('');
                 $('#quantidadeProduto').val('');
             },

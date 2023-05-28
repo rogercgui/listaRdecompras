@@ -54,6 +54,7 @@
         <script src="public/assets/js/popper.min.js"></script>
         <script src="public/assets/js/bootstrap.min.js"></script>
         <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="public/assets/js/toTop.js"></script>
 
         
         <footer class="container-fluid">
