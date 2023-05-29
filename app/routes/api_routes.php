@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'criar_lista') {
     $titulo = $data['titulo'];
     $listaId = $api->criarLista($titulo);
     $response = array('listaId' => $listaId);
-   // echo json_encode($response);
 }
 
 // Rota para apagar uma lista de compras
@@ -48,7 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'excluir_lista') {
     $listaId = $_GET['id'];
     $api->deletarLista($listaId);
     $response='Lista apagada com sucesso';
-    //echo json_encode('Lista apagada com sucesso');
+}
+
+// Rota para alterar o nome de uma lista
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'renomear_lista') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $listaId = $_GET['id'];
+    $titulo = $_GET['titulo'];
+    $api->mudarTituloLista($titulo, $listaId);
+    $response='Título da listas alterado para: '.$titulo;
 }
 
 // Rota para adicionar um produto a uma lista de compras
@@ -58,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'adicionar_produto') {
     $nome = $data['nome'];
     $quantidade = $data['quantidade'];
     $api->adicionarProduto($listaId, $nome, $quantidade);
-    $response='Produto adicionado com sucesso';
-    //echo json_encode('Produto adicionado com sucesso');
+    $response='Produto adicionado com sucesso '.$listaId;
 }
 
 // Rota para remover um produto de uma lista de compras
