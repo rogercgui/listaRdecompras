@@ -1,14 +1,17 @@
 <?php
 
 // Importe a classe controladora
-require_once '../app/controllers/ControllersAPI.php';
+require_once '../app/controllers/ControllersListas.php';
+require_once '../app/controllers/ControllersProdutos.php';
 
 // Instancie a classe controladora
 
-use app\controllers\ControllersAPI;
+use app\controllers\ControllersListas;
+use app\controllers\ControllersProdutos;
 
 
-$api = new ControllersAPI();
+$api_L = new ControllersListas();
+$api_P = new ControllersProdutos();
 
 if (isset($_GET['route'])) {
     $route=$_GET['route'];
@@ -19,7 +22,7 @@ if (isset($_GET['route'])) {
 
 // Rota para obter os dados de todas as listas
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $route === 'obter_listas') {
-    $listas = $api->obterListas();
+    $listas = $api_L->obterListas();
     $response = array('listas' => $listas);
     //echo json_encode($response);
 }
@@ -27,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $route === 'obter_listas') {
 // Rota para obter os dados de uma lista de compras
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $route === 'obter_lista') {
     $listaId = $_GET['id'];
-    $lista = $api->obterLista($listaId);
-    $produtos = $api->obterProdutos($listaId);
+    $lista = $api_L->obterLista($listaId);
+    $produtos = $api_P->obterProdutos($listaId);
     $response = array('lista' => $lista, 'produtos' => $produtos);
     //echo json_encode($response);
 }
@@ -37,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $route === 'obter_lista') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'criar_lista') {
     $data = json_decode(file_get_contents('php://input'), true);
     $titulo = $data['titulo'];
-    $listaId = $api->criarLista($titulo);
+    $listaId = $api_L->criarLista($titulo);
     $response = array('listaId' => $listaId);
 }
 
@@ -45,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'criar_lista') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'excluir_lista') {
     $data = json_decode(file_get_contents('php://input'), true);
     $listaId = $_GET['id'];
-    $api->deletarLista($listaId);
+    $api_L->deletarLista($listaId);
     $response='Lista apagada com sucesso';
 }
 
@@ -54,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'renomear_lista') {
     $data = json_decode(file_get_contents('php://input'), true);
     $listaId = $_GET['id'];
     $titulo = $_GET['titulo'];
-    $api->mudarTituloLista($titulo, $listaId);
+    $api_L->mudarTituloLista($titulo, $listaId);
     $response='Título da listas alterado para: '.$titulo;
 }
 
@@ -64,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'adicionar_produto') {
     $listaId = $data['listaId'];
     $nome = $data['nome'];
     $quantidade = $data['quantidade'];
-    $api->adicionarProduto($listaId, $nome, $quantidade);
+    $api_P->adicionarProduto($listaId, $nome, $quantidade);
     $response='Produto adicionado com sucesso '.$listaId;
 }
 
@@ -72,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'adicionar_produto') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'remover_produto') {
     $data = json_decode(file_get_contents('php://input'), true);
     $produtoId = $data['produtoId'];
-    $api->removerProduto($produtoId);
+    $api_P->removerProduto($produtoId);
     $response='Produto removido com sucesso';
    // echo json_encode('Produto removido com sucesso');
 }
@@ -82,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'adicionar_quantidade') 
     $data = json_decode(file_get_contents('php://input'), true);
     $produtoId = $data['produtoId'];
     $quantidade = $data['quantidade'];
-    $api->adicionarQuantidade($produtoId, $quantidade);
+    $api_P->adicionarQuantidade($produtoId, $quantidade);
     $response='Quantidade adicionada com sucesso';
     //echo json_encode('Quantidade adicionada com sucesso');
 }
@@ -92,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'diminuir_quantidade') {
     $data = json_decode(file_get_contents('php://input'), true);
     $produtoId = $data['produtoId'];
     $quantidade = $data['quantidade'];
-    $api->diminuirQuantidade($produtoId, $quantidade);
+    $api_P->diminuirQuantidade($produtoId, $quantidade);
     $response='Quantidade diminuída com sucesso';
     //echo json_encode('Quantidade diminuída com sucesso');
 }
@@ -101,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'diminuir_quantidade') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $route === 'duplicar_lista') {
     $data = json_decode(file_get_contents('php://input'), true);
     $listaId = $data['listaId'];
-    $novaListaId = $api->duplicarLista($listaId);
+    $novaListaId = $api_L->duplicarLista($listaId);
     $response = array('novaListaId' => $novaListaId);
     //echo json_encode($response);
 }
