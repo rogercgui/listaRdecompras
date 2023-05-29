@@ -23,6 +23,38 @@ $(document).ready(function () {
         });
     });
 
+
+    // Altera o nome de uma lista
+    $('#FormEditarTitulo').submit(function (e) {
+        e.preventDefault();
+        var capturaIDLista = $('#idLista').val();
+        var titulo = $('#EditaTitulo').val();
+        alert(titulo);
+        listaId = capturaIDLista;
+        $.ajax({
+            url: 'api/?route=renomear_lista&id=' + listaId + '&titulo=' + titulo,
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({ titulo: titulo }),
+            success: function (response) {
+                listaId = response.listaId;
+                $('#formCriarLista').hide();
+                $('#FormEditarTitulo').hide();
+                $('#listaTitulo').text(titulo);
+                $('#listaProdutos').show();
+                carregarProdutos(listaId);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+    // Exibe o form para edição do título
+    $(document).on("click", ".editar-titulo", function () {
+        $('#FormEditarTitulo').show();
+    });
+
     // Modifica uma lista selecionada
     $(document).on("click", ".editar", function (e) {
         e.preventDefault();
@@ -37,6 +69,7 @@ $(document).ready(function () {
                 idLista = response.lista.id;
                 $('#formCriarLista').hide();
                 $('#listaTitulo').text(titulo);
+                $('#EditaTitulo').val(titulo);
                 $('#idLista').val(idLista);
                 $('#listaProdutos').show();
                 carregarProdutos(listaId);
@@ -47,10 +80,17 @@ $(document).ready(function () {
         });
     });
 
+
     // Adiciona produtos em uma lista
     $('#formAdicionarProduto').submit(function (e) {
         e.preventDefault();
-        var listaId = 144
+        var capturaIDLista = $('#idLista').val();
+        if (capturaIDLista  === '') {
+            console.log('O campo está vazio!');
+        } else {
+            listaId = capturaIDLista;
+            console.log('Valor do campo:', listaId );
+        }
         var nome = $('#nomeProduto').val();
         var quantidade = $('#quantidadeProduto').val();
         $.ajax({
