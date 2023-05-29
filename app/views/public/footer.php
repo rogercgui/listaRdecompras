@@ -54,11 +54,14 @@
         <script src="public/assets/js/popper.min.js"></script>
         <script src="public/assets/js/bootstrap.min.js"></script>
         <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="public/assets/js/toTop.js"></script>
 
         
         <footer class="container-fluid">
-            <hr>
-            2023 - Criado por Roger C. Guilherme
+          <div class="text-center py-3" >
+            ©2023 Copyright:
+            <a class="text-dark" href="https://github.com/rogercgui/listaRdecompras" target="_blank">Criado por Roger C. Guilherme</a>
+          </div>
         </footer>
     </body>
     </html>
