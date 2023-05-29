@@ -220,7 +220,7 @@ $(document).ready(function () {
                 type: 'POST',
                 dataType: 'json',
                 success: function (response) {
-                        alert('Lista excluída com sucesso!');
+                        //alert('Lista excluída com sucesso!');
                         location.reload();
                 },
                 error: function (error) {
