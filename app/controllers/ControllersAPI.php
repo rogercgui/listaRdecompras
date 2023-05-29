@@ -56,6 +56,12 @@ class ControllersAPI {
         $this->db->exec($query_prod);
     }
 
+    // Altera o nome de uma lista
+    public function mudarTituloLista($titulo, $listaId) {
+        $query = "UPDATE listas SET titulo = '$titulo' WHERE id = $listaId";
+        $this->db->exec($query);
+    }
+
     // Adiciona um produto a uma lista de compras (id, nome, quantidade)
     public function adicionarProduto($listaId, $nome, $quantidade) {
         $query = "INSERT INTO produtos (lista_id, nome, quantidade) VALUES ($listaId, '$nome', $quantidade)";

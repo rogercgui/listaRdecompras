@@ -12,7 +12,23 @@
         </form>
 
         <div id="listaProdutos" style="display: none;">
-            <h2 id="listaTitulo" class="d-block"></h2>
+        <div class="row">
+            <h2>
+            <span id="listaTitulo" class="d-inline"></span>
+            <button type="button" class="btn btn-sm btn-default editar-titulo" >Editar</button>
+            </h2>
+            <form id="FormEditarTitulo" style="display: none;" class="row row-cols-lg-auto g-3 align-items-center">
+                <div class="col-12">
+                    <label>Modifique o título da lista</label>
+                </div>
+                <div class="col-12">
+                    <input type="text" id="EditaTitulo" class="form-control" value="" name="titulo">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <form id="formAdicionarProduto" class="row row-cols-lg-auto g-3 align-items-center">
                     <div class="col-12">
