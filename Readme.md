@@ -51,5 +51,6 @@
 
 ![image](https://github.com/rogercgui/listaRdecompras/assets/20482054/93bbfee0-d329-4508-9254-8b25e04de3f7)
 
+Mais detalhes sobre as rotas desta API estão disponíveis no link: https://documenter.getpostman.com/view/27672790/2s93m8xzYg
 
 
